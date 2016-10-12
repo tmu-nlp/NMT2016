@@ -11,3 +11,4 @@ def func3(sugar):
 	return sugar
 
 print("test")
+print('test2')
