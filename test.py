@@ -5,9 +5,9 @@ def func1(x):
 	return x
 
 def func2(x, y):
-	return x
+	return x + y
 
 def func3(sugar):
-	return "sugar"
+	return sugar
 
 print("test")
