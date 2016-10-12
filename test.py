@@ -8,6 +8,6 @@ def func2(x, y):
 	return x + y
 
 def func3(sugar):
-	return sugar
+	return "sugar_sugar"
 
 print("test")
