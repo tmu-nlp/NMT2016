@@ -1,7 +1,7 @@
 #!/usr/bin/python
 # -*- coding:utf-8 -*- 
 
-def func1(x):
+def hogeta(x):
 	return x*2
 
 def func2(x, y):
