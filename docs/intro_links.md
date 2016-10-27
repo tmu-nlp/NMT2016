@@ -6,11 +6,11 @@
 ```python
 word2emb = EmbedID(V, M) M:入力語彙次元, N:出力次元数
 emb2hid = Linear(M, N) M:入力次元数, N:出力次元数
-layer = L.LSTM(M, N) M:x^{t}の次元数(h^{t-1}とc{t}の次元数は考慮しなくてよい), N:出力次元数
+lstm = L.LSTM(M, N) M:x^{t}の次元数, N:出力次元数 ※Mについて、h^{t-1}とc{t}の次元数は考慮しなくてよい
 
 embed_vec = word2emb（入力ベクトル)
 hidden_vec = emb2hid(入力ベクトル)
-layer = layer(入力ベクトル)
+layer = (入力ベクトル)
 
 みたいな使い方
 ```
@@ -35,6 +35,7 @@ Out: <variable at 0x1110f3470> # オブジェクト
 In: x.data
 Out: array([0, 1, 2, 3, 4], dtype=int32) # .dataで中身をみれます
 ```
+#####多くの場合において、Variable.data.shape[0]はbatchサイズ！！！
 
 ####EmbedIDについて
 
@@ -48,6 +49,14 @@ np.array([[1],
           [3],
           [4],
           [5]]) # shape > (5,1) これも行列
+
+ちなみにreshapeで次元数を変更したものを返す
+arr = np.array([1,2,3,4,5,6])
+reshaped_arr = arr.reshape(3,2) 
+In: reshaped_arr
+Out: array([[1, 2],
+            [3, 4],
+            [5, 6]])
 ```
 
 #####単語idベクトルを用意 
@@ -70,7 +79,6 @@ Out: [[1,0,0,0,0,0,0,,,,,], # （batchサイズ,　語彙次元）のone-of-k
 
 #####one-of-k → 埋め込み層次元のベクトルに変換
 ```python
-# EmbedID(語彙次元数, 埋め込み層次元数)
 id2emb = L.EmbedID(100,10)
 emb = id2emb(wordid) 
 In: emb.data
@@ -100,21 +108,29 @@ Out: array([[-1.13752449, -0.52425206, -2.9208231 ,  0.94727218, -0.85582888,
 #####線形変換するために用いる
 
 ```python
-emb2hid = L.Linear(10, 2) 
-hid = emb2hid(emb) # (batchサイズ, 埋め込み層次元)の行列に、(入力次元数, 出力次元数)次元の重み行列をかける → （batchサイズ, 出力次元数)
-が得られる
+emb2hid = L.Linear(10, 2) # 10次元を2次元に変換
+hid = emb2hid(emb) # (batchサイズ, 埋め込み層次元数) * (埋め込み層次元数, 出力次元数) → （batchサイズ, 出力次元数)
 In: hid.data
 Out: array([[ 1.5764128 ,  0.52369976],
             [ 0.80156308,  0.76217818],
             [-0.0672536 ,  0.54038751],
             [ 0.39135873,  0.54352796],
             [-0.23365495,  0.2514739 ],
-            [-1.36178613,  2.24770927]], dtype=float32)
+            [-1.36178613,  2.24770927]], dtype=float32) 
+
+```
+上記のような変換が一般的だけど、他にもこんなことができるよ
+```python
+x = Variable(np.array(M*N*O, dtype=np.float32).reshape(M,N,O))
+In: x.data.shape
+Out: (M,N,O) # 
+
+l = L.Linear(N*O, P)
+In: l(x).data.shape
+Out: (M, P)
 ```
 
 ####LSTMについて
 
 #####linksのLSTMはstatefulとstatelessに分かれるが、使うのはstateful（デフォルトは多分stateful）
 #####statefulを用いると、LSTM間の隠れ層ベクトルh^{t-1}と状態ベクトルc^{t}を考慮しなくても勝手に内部でやってくれる
-
-
