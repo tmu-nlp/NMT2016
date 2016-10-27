@@ -8,7 +8,7 @@
 - sum
 
 ####reshapeについて
-Variableの次元数を変更（numpyのreshapeとちがって、返り値があるよ）
+Variableの次元数を変更  
 reshape(Variable, (次元数))で使う
 
 ```python
