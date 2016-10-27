@@ -1,7 +1,20 @@
 ###NMT実装で使う主なlinksの説明
-- EmbedID(語彙次元数, 埋め込み層次元数): one-of-kベクトルを用意しないで（単語idだけで）Embedベクトルをつくれる
-- Linear(入力次元数, 出力次元数): 入力次元数→出力次元数に変換する線形変換
-- LSTM（隠れ層次元数, 隠れ層次元数)
+
+- EmbedID: one-of-kベクトルを用意しないで（単語idだけで）Embedベクトルをつくれる
+- Linear: 入力次元数→出力次元数に変換する線形変換
+- LSTM: 
+```python
+word2emb = EmbedID(V, M) M:入力語彙次元, N:出力次元数
+emb2hid = Linear(M, N) M:入力次元数, N:出力次元数
+layer = L.LSTM(M, N) M:x^{t}の次元数(h^{t-1}とc{t}の次元数は考慮しなくてよい), N:出力次元数
+
+embed_vec = word2emb（入力ベクトル)
+hidden_vec = emb2hid(入力ベクトル)
+layer = layer(入力ベクトル)
+
+みたいな使い方
+```
+（チュートリアルの1章読めばすぐわかるようなことはあまり書いてないです...）
 
 ```python
 # importするものは以降書きません
@@ -25,7 +38,7 @@ Out: array([0, 1, 2, 3, 4], dtype=int32) # .dataで中身をみれます
 
 ####EmbedIDについて
 
-#####入力は、基本的にベクトル(!=行列)形式  
+#####入力は、基本的にベクトル(!=行列)形式
 numpyについて軽くふれておきます
 ```python
 np.array([1,2,3,4,5]) # shape > (5,) これはベクトル
@@ -42,7 +55,7 @@ np.array([[1],
 wordid = Variable(np.array([0], dtype=np.int32)) # dtype=np.int32を指定すること!!
 
 # もしbatchサイズ個入力に与えたい場合は、arrayにbatchサイズ個だけidを入れておく
-wordid_batch = Variable(np.array([0,3,2,1,5,1], dtype=np.int32))  #ベクトル（!=行列）であることに注意
+wordid_batch = Variable(np.array([0,3,2,1,5,1], dtype=np.int32))  #Variableへの引数のshapeはベクトル（!=行列）であることに注意
 
 ↑ wordid_batchのイメージは以下のようなone-of-kベクトルの集合、
   実際は上記のように単語に対応するidを用意すればよい
@@ -87,8 +100,7 @@ Out: array([[-1.13752449, -0.52425206, -2.9208231 ,  0.94727218, -0.85582888,
 #####線形変換するために用いる
 
 ```python
-# Linear(入力次元数, 出力次元数)
-emb2hid = L.Linear(10, 2)
+emb2hid = L.Linear(10, 2) 
 hid = emb2hid(emb) # (batchサイズ, 埋め込み層次元)の行列に、(入力次元数, 出力次元数)次元の重み行列をかける → （batchサイズ, 出力次元数)
 が得られる
 In: hid.data
