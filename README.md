@@ -1,5 +1,8 @@
 # NMT2016
 
+ニューラル機械翻訳(Bahdanau et al., 2015)の実装  
+RNNの各ユニットはLSTMで構成  
+
 ## 1. 事前準備
 - Python 3.4.x
 - chainer (>ver 1.16)
@@ -7,7 +10,7 @@
 
 ## 2. モデルのトレーニング
 
-translate.shの以下の変数にパスを与える。
+translate.shの以下の変数でパスを指定 　
 
 - TRAIN_SOURCE_FILE （原言語コーパス)
 - TRAIN_TARGET_FILE （目的言語コーパス）
@@ -20,5 +23,14 @@ translate.sh実行時、$1にtrainを引数として与えることで学習開�
 ./translate.sh train
 ```
 
+## 3. テスト
 
+translate.shの以下の変数でパスを指定
 
+- TEST_SOURCE_FILE
+- TEST_TARGET_FILE 
+
+以下を実行（minibatchは1で固定）
+```
+./translate.sh test
+```
