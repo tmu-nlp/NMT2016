@@ -13,10 +13,8 @@ translate.shの以下の変数にパスを与える。
 - TRAIN_TARGET_FILE （目的言語コーパス）
 - MODEL_DIR （モデルを保存するディレクトリ）
 
-TRAIN_SOURCE_FILEとTRAIN_TARGET_FILEを用いてモデルを学習する。
-
-モデルは各エポックごとにMODEL_DIRに'ファイル名.エポック数'で書き込まれる。（デフォルトのファイル名は'epoch'）
-
+TRAIN_SOURCE_FILEとTRAIN_TARGET_FILEを用いてモデルを学習する。  
+モデルは各エポックごとにMODEL_DIRに'ファイル名.エポック数'で書き込まれる。（デフォルトのファイル名は'epoch'）  
 translate.sh実行時に$1にtrainを引数として与えることで学習開始。
 ```
 ./translate.sh train
