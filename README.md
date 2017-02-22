@@ -18,7 +18,7 @@ translate.shの以下の変数でパスを指定 　
 
 TRAIN_SOURCE_FILEとTRAIN_TARGET_FILEを用いてモデルを学習する。  
 モデルは各エポックごとにMODEL_DIRに'ファイル名.エポック数'で書き込まれる（デフォルトのファイル名は'epoch'）。  
-translate.sh実行時、$1にtrainを引数として与えることで学習開始。　
+translate.sh実行時、$1にtrainを引数として与えることで学習開始。  
 ※GPUを用いない場合（USE_GPU=0）、学習にかなりの時間を要します。
 ```
 ./translate.sh train
