@@ -15,6 +15,7 @@ def fill_batch(batch, token='__NULL__'):
 def arg_parser():
     
     # default settings
+    use_gpu = 1
     gpu_device = 0
     vocab_size = 30000
     embed_size = 512
@@ -35,8 +36,8 @@ def arg_parser():
     p.add_argument('--target', help='set target corpus file path for reading on train or writing on test')
 
     p.add_argument('--model', help='set model file path for writing on train or reading on test')
-    p.add_argument('--use_gpu', action='store_true', default=1, help='use GPU calculation')
-    p.add_argument('--gpu-device', default=gpu_device, metavar='INT', type=int, help='GPU device ID to be used (default: %(default)d)')
+    p.add_argument('--use_gpu', default=use_gpu, help='use GPU calculation')
+    p.add_argument('--gpu_device', default=gpu_device, metavar='INT', type=int, help='GPU device ID to be used (default: %(default)d)')
     p.add_argument('--vocab', default=vocab_size, metavar='INT', type=int, help='vocabulary size (default: %(default)d)')
     p.add_argument('--embed', default=embed_size, metavar='INT', type=int, help='embedding layer size (default: %(default)d)')
     p.add_argument('--hidden', default=hidden_size, metavar='INT', type=int, help='hidden layer size (default: %(default)d)')

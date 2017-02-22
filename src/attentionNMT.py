@@ -121,6 +121,8 @@ class Decoder(Chain):
             hid2hid = L.Linear(hidden_size, 4 * hidden_size),
             att2hid = L.Linear(hidden_size*2, 4 * hidden_size),
             emb_hid_att2maxout = L.Maxout(embed_size+hidden_size+hidden_size*2, maxout_size, 2),
+            
+            #emb_hid_att2maxout = L.Linear(embed_size+hidden_size+hidden_size*2, maxout_size), 
             maxout2y = L.Linear(maxout_size, vocab_size),
         )
 
