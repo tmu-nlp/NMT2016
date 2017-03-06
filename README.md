@@ -18,9 +18,9 @@ translate.shの以下の変数でパスを指定。()内は実行時オプショ
 - MODEL_DIR (-m）
 
 MODE: train  
-SOURCE_FILE: 原言語コーパス  
-TARGET_FILE: 目的言語コーパス
-MODEL_DIR: モデルを保存するためのディレクトリ  
+SOURCE_FILE: 原言語コーパス  
+TARGET_FILE: 目的言語コーパス  
+MODEL_DIR: モデルを保存するためのディレクトリ   
 
 SOURCE_FILEとTARGET_FILEに含まれる文は、それぞれ以下のような1行1文で単語分割されていること。  
 ```  
@@ -41,9 +41,9 @@ translate.shの以下の変数でパスを指定
 - MODEL_DIR (-m)
 - MODEL_NUM (-n)
 
-MODE: test
-OUTPUT_FILE: 出力を書き込むファイル
-MODEL_DIR: モデルを読み込むディレクトリ
-MODEL_NUM: エポック数
+MODE: test  
+OUTPUT_FILE: 出力を書き込むファイル  
+MODEL_DIR: モデルを読み込むディレクトリ  
+MODEL_NUM: エポック数  
 上記の変数を指定したのち、./translate.shを実行でテスト開始。
 
