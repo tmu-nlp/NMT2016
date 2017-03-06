@@ -155,10 +155,10 @@ class AttentionMT(Chain):
         self.embed_size = embed_size
         self.hidden_size = hidden_size
 
-    def initialize_emb(self, src_vocab=None, src_word2vec=None, trg_vocab=None, trg_word2vec=None):
-        if src_word2vec is not None:
+    def initialize_emb(self, src_vocab=None, src_word2vec='', trg_vocab=None, trg_word2vec=''):
+        if src_word2vec:
             self.emb.initialize_embed_w2v(src_vocab, src_word2vec)
-        if trg_word2vec is not None:
+        if trg_word2vec:
             self.dec.initialize_embed_w2v(trg_vocab, trg_word2vec)
 
     def reset(self, batch_size):
@@ -277,9 +277,9 @@ def train(args):
 
     attmt = AttentionMT(args.vocab, args.embed, args.hidden, args.maxout)
 
-    if args.word2vec_source is not None:
+    if args.word2vec_source:
         attmt.initialize_emb(src_vocab, word2vec.Word2Vec.load(args.word2vec_source))
-    if args.word2vec_target is not None:
+    if args.word2vec_target:
         attmt.initialize_emb(trg_vocab, word2vec.Word2Vec.load(args.word2vec_target))
 
     if args.use_gpu:
