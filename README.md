@@ -10,28 +10,40 @@ RNNの各ユニットはLSTMで構成
 
 ## 2. モデルのトレーニング
 
-translate.shの以下の変数でパスを指定 　
+translate.shの以下の変数でパスを指定。()内は実行時オプション。
 
-- TRAIN_SOURCE_FILE （原言語コーパス)
-- TRAIN_TARGET_FILE （目的言語コーパス）
-- MODEL_DIR （モデルを保存するディレクトリ）
+- MODE (-a)
+- SOURCE_FILE (-s)
+- TARGET_FILE （-o）
+- MODEL_DIR (-m）
 
-TRAIN_SOURCE_FILEとTRAIN_TARGET_FILEを用いてモデルを学習する。  
+MODE: train  
+SOURCE_FILE: 原言語コーパス  
+TARGET_FILE: 目的言語コーパス
+MODEL_DIR: モデルを保存するためのディレクトリ  
+
+SOURCE_FILEとTARGET_FILEに含まれる文は、それぞれ以下のような1行1文で単語分割されていること。  
+```  
+私 は 日本人 です 。
+I am Japanese .
+```
 モデルは各エポックごとにMODEL_DIRに'ファイル名.エポック数'で書き込まれる（デフォルトのファイル名は'epoch'）。  
-translate.sh実行時、$1にtrainを引数として与えることで学習開始※。  
-※GPUを用いない場合（USE_GPU=0）、学習にかなりの時間を要します。
-```
-./translate.sh train
-```
+GPUを用いない場合（USE_GPU=0）、学習にかなりの時間を要します。
+上記の変数を指定したのち、./translate.shを実行で学習開始。  
 
 ## 3. テスト
 
 translate.shの以下の変数でパスを指定
 
-- TEST_SOURCE_FILE
-- TEST_TARGET_FILE 
+- MODE (-a)
+- SOURCE_FILE (-s)
+- OUTPUT_FILE (-o)
+- MODEL_DIR (-m)
+- MODEL_NUM (-n)
 
-以下を実行（minibatchは1で固定）
-```
-./translate.sh test
-```
+MODE: test
+OUTPUT_FILE: 出力を書き込むファイル
+MODEL_DIR: モデルを読み込むディレクトリ
+MODEL_NUM: エポック数
+上記の変数を指定したのち、./translate.shを実行でテスト開始。
+
