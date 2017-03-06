@@ -22,7 +22,7 @@ SOURCE_FILE: 原言語コーパス
 TARGET_FILE: 目的言語コーパス  
 MODEL_DIR: モデルを保存するためのディレクトリ   
 
-SOURCE_FILEとTARGET_FILEに含まれる文は、それぞれ以下のような1行1文で単語分割されていること。  
+SOURCE_FILEとTARGET_FILEに含まれる文は①単語分割済み、②1行1文、を満たしていること。  
 ```  
 私 は 日本人 です 。
 I am Japanese .
