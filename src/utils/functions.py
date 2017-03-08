@@ -13,22 +13,6 @@ def fill_batch(batch, token='__NULL__'):
 
 
 def arg_parser():
-    
-    # default settings
-    use_gpu = 1
-    gpu_device = 0
-    vocab_size = 30000
-    embed_size = 512
-    hidden_size = 512
-    maxout_size = 512
-    epoch_num = 10
-    minibatch = 64
-    pooling = 100
-    generation_limit = 60
-    optimizer = "Adagrad"
-    learning_rate = 0.01
-
-
     p = ArgumentParser()
 
     p.add_argument('--mode', help='\'train\' or \'test\'')
@@ -48,8 +32,8 @@ def arg_parser():
     p.add_argument('--generation_limit', default=generation_limit, metavar='INT', type=int, help='maximum number of words to be generated for test input (default: %(default)d)')
     p.add_argument('--optimizer', default=optimizer, help="set SGD, Adagrad, or Adam for optimizer used for train")
     p.add_argument('--learning_rate', default=learning_rate)
-    p.add_argument('--word2vec_source', default=None) 
-    p.add_argument('--word2vec_target', default=None)
+    p.add_argument('--word2vec_source', default='') 
+    p.add_argument('--word2vec_target', default='')
 
     args = p.parse_args()
 
