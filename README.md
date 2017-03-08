@@ -10,7 +10,7 @@ RNNの各ユニットはLSTMで構成
 
 ## 2. モデルのトレーニング
 
-translate.shの以下の変数でパスを指定。()内は実行時オプション。
+translate.shの環境変数でパスを指定。()内の実行時オプションでも指定可。
 
 - MODE (-a)
 - SOURCE_FILE (-s)
@@ -34,7 +34,7 @@ GPUを用いない場合（USE_GPU=0）、学習にかなりの時間を要し�
 
 ## 3. テスト
 
-translate.shの以下の変数でパスを指定
+translate.shの環境変数でパスを指定。()内の実行時オプションでも指定可。
 
 - MODE (-a)
 - SOURCE_FILE (-s)
@@ -46,5 +46,15 @@ MODE: test
 OUTPUT_FILE: 出力を書き込むファイル  
 MODEL_DIR: モデルを読み込むディレクトリ  
 MODEL_NUM: エポック数  
+
+SOURCE_FILEに含まれる文は、以下のような単語分割済みかつ1行1文であること。　
+```
+私 は 日本人 です 。
+```
+OUTPUT_FILEには、単語分割された文が出力されます。  
+```
+I am Japanese .
+```
+
 上記の変数を指定したのち、./translate.shを実行でテスト開始。
 
