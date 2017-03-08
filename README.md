@@ -7,6 +7,7 @@ RNNの各ユニットはLSTMで構成
 - Python 3.4.x
 - chainer (>ver 1.16)
 - hdf5
+- gensim (>ver 0.13.3)
 
 ## 2. モデルのトレーニング
 
