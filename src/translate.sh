@@ -58,5 +58,5 @@ python attentionNMT.py --mode "$MODE" --source "$SOURCE_FILE" --target "$TARGET_
        --model "$MODEL" --use_gpu "$USE_GPU" --gpu_device "$GPU_DEVICE" --vocab "$VOCAB_SIZE" \
        --embed "$EMBED_SIZE" --hidden "$HIDDEN_SIZE" --maxout "$MAXOUT_SIZE" --epoch "$EPOCH_NUM" \
        --minibatch "$BATCH_SIZE" --pooling "$POOLING" --optimizer "$OPTIMIZER" --learning_rate "$LEARNING_RATE" \
-       --word2vec_source "$WORD2VEC_SOURCE" --word2vec_target "$WORD2VEC_TARGET"
+       --generation_limit "$GENERATION_LIMIT" --word2vec_source "$WORD2VEC_SOURCE" --word2vec_target "$WORD2VEC_TARGET"
 
